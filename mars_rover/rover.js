@@ -32,7 +32,7 @@ function isClear(valX , valY) {
 	}
 	
 	if (landMap[valX][valY] == 0) {
-		writeLn("Next position it's clear");
+		writeLine("Next position it's clear");
 		return true;	
 	}
 	
@@ -58,28 +58,28 @@ function goForward(rover) {
       break;
   };
 
-  console.log("New Rover Position: [" + rover.positionX + ", " + rover.positionY + "]");
+  writeLine("New Rover Position: [" + rover.positionX + ", " + rover.positionY + "]");
   
 }
 
-function writeLn(string) {
+function writeLine(string) {
 	document.write(string);
 	document.write("<br />");
 }
 
 goForward(myRover);
-writeLn(myRover.compass[0]);
-writeLn(myRover.compass);
+writeLine(myRover.compass[0]);
+writeLine(myRover.compass);
 
 rotateDirection("left", myRover.compass);
-writeLn(myRover.compass[0]);
-writeLn(myRover.compass);
+writeLine(myRover.compass[0]);
+writeLine(myRover.compass);
 
 rotateDirection("right", myRover.compass);
-writeLn(myRover.compass[0]);
-writeLn(myRover.compass);
+writeLine(myRover.compass[0]);
+writeLine(myRover.compass);
 
-writeLn(landMap[0].length);
+writeLine(landMap[0].length);
 
-writeLn(landMap[1][1]);
+writeLine(landMap[1][1]);
 isClear(10,1);
