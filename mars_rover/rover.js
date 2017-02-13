@@ -27,7 +27,7 @@ function rotateDirection(direction, array){
 
 function isClear(valX , valY) {
 	if (valX > landMap.length - 1 || valY > landMap[0].length - 1) {
-		document.write("Position is out of bounds");
+		writeLine("Position is out of bounds");
 		return false;
 	}
 	
@@ -37,7 +37,7 @@ function isClear(valX , valY) {
 	}
 	
 	if (landMap[valX][valY] == 1) {
-		document.write("There is an obstacle");
+		writeLine("There is an obstacle");
 		return false;	
 	}
 }
@@ -63,8 +63,9 @@ function goForward(rover) {
 }
 
 function writeLine(string) {
-	document.write(string);
-	document.write("<br />");
+	var e = document.getElementById("rover-console");
+	e.innerHTML += string;
+	e.innerHTML += "<br />";
 }
 
 goForward(myRover);
