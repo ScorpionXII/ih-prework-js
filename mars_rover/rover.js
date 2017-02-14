@@ -83,19 +83,27 @@ function isClear(valX , valY) {
 function goForward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
-		if (isClear(rover.positionX + 1, rover.positionY))
+		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+			rover.positionX = 0;
+		} else if (isClear(rover.positionX + 1, rover.positionY))
 			rover.positionX++;
 		break;
 	case 'E':
-		if (isClear(rover.positionX, rover.positionY + 1))
+		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
+			rover.positionY = 0;
+		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
 	case 'S':
-		if (isClear(rover.positionX - 1, rover.positionY))
+		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
+			rover.positionX = landMap.length - 1;
+		} else if (isClear(rover.positionX - 1, rover.positionY))
 			rover.positionX--;
 		break;
 	case 'W':
-		if (isClear(rover.positionX, rover.positionY - 1))
+		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
+			rover.positionY = landMap[0].length - 1;
+		} else if (isClear(rover.positionX, rover.positionY - 1))
 			rover.positionY--;
 		break;
 	};
@@ -107,23 +115,30 @@ function goForward(rover) {
 function goBackward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
-		if (isClear(rover.positionX - 1, rover.positionY))
+		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
+			rover.positionX = landMap.length - 1;
+		} else if (isClear(rover.positionX - 1, rover.positionY))
 			rover.positionX--;
 		break;
 	case 'E':
-		if (isClear(rover.positionX, rover.positionY - 1))
+		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
+			rover.positionY = landMap[0].length - 1;
+		} else if (isClear(rover.positionX, rover.positionY - 1))
 			rover.positionY--;
 		break;
 	case 'S':
-		if (isClear(rover.positionX + 1, rover.positionY))
+		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+			rover.positionX = 0;
+		} else if (isClear(rover.positionX + 1, rover.positionY))
 			rover.positionX++;
-		break;
 	case 'W':
-		if (isClear(rover.positionX, rover.positionY + 1))
+		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
+			rover.positionY = 0;
+		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
 	};
-
+	
   writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
 }
 
