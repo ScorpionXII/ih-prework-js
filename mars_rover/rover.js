@@ -8,7 +8,7 @@
 
 var landMap = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -29,21 +29,28 @@ var lineCounter = 1;
 
 
 function rotateDirection(direction, array) {
-  if(direction == "left")
-    array.unshift(array.pop());
-  else if (direction == "right")
-    array.push(array.shift());
-  return array;
+	if(direction == "left") {
+		writeLine("Received command to rotate to Left");
+		array.unshift(array.pop());
+		writeLine("Rover Compass it's now pointing: " + myRover.compass[0]);
+	} else if (direction == "right") {
+		writeLine("Received command to rotate to Right");
+  		array.push(array.shift());	
+  		writeLine("Rover Compass it's now pointing: " + myRover.compass[0]);
+  	}
+  	return array;
 }
 
 function isClear(valX , valY) {
+	writeLine("Received command to move to [" + valX + "," + valY + "]");
+	
 	if (valX < 0 || valY < 0 || valX > landMap.length - 1 || valY > landMap[0].length - 1) {
 		writeLine("Position is out of bounds");
 		return false;
 	}
 	
 	if (landMap[valX][valY] == 0) {
-		writeLine("You are trying to move to position " + valX + "," + valY + " and it's clear");
+		writeLine("Path it's clear");
 		return true;	
 	}
 	
@@ -73,7 +80,7 @@ function goForward(rover) {
 		break;
 	};
 	
-  writeLine("Rover Position: [" + rover.positionX + ", " + rover.positionY + "]"); 
+  writeLine("Rover Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
 }
 
 function goBackward(rover) {
@@ -96,7 +103,7 @@ function goBackward(rover) {
 		break;
 	};
 
-  writeLine("Rover Position: [" + rover.positionX + ", " + rover.positionY + "]"); 
+  writeLine("Rover Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
 }
 
 function processCommandChain(string) {
@@ -128,19 +135,11 @@ function writeLine(string) {
 	lineCounter++;
 }
 
-// goForward(myRover);
-// writeLine(myRover.compass[0]);
-// writeLine(myRover.compass);
-// 
-// rotateDirection("left", myRover.compass);
-// writeLine(myRover.compass[0]);
-// writeLine(myRover.compass);
-// 
-// rotateDirection("right", myRover.compass);
-// writeLine(myRover.compass[0]);
-// writeLine(myRover.compass);
-// 
-// writeLine(landMap[0].length);
-// 
-// writeLine(landMap[1][1]);
-// isClear(1,1);
+function initialInfo () {
+	writeLine("Initializing communications...");
+	writeLine("Rover it's online");
+	writeLine("Rover Position: [" + myRover.positionX + ", " + myRover.positionY + "]");
+  	writeLine("Rover Compass it's pointing: " + myRover.compass[0]);
+}
+
+initialInfo();
