@@ -7,12 +7,14 @@
 */
 
 body {
+	font-family: Arial;
+	font-size: 12px;
 	background-color: #333333;
 }
 
 .rover-control {
-	max-width: 800px;
-	min-width: 600px;
+	max-width: 500px;
+	min-width: 300px;
 	margin: auto;
 	background-color: #e6e6e6;
 	border-radius: 5px;
@@ -22,8 +24,8 @@ body {
 }
 
 .rover-console {
-	max-width: 800px;
-	min-width: 600px;
+	max-width: 500px;
+	min-width: 300px;
 	height: 600px;
 	max-height: 600px;
 	overflow-y: auto;
