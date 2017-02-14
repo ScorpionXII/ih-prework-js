@@ -55,6 +55,7 @@ function rotateDirection(direction, rover) {
 
 //This function checks if the position defined by X, Y is valid, clear to move, occupied by a rover or if there is an obstacle
 function isClear(valX , valY) {
+	
 	writeLine("Received command to move to [" + valX + ", " + valY + "]");
 	
 	if (valX < 0 || valY < 0 || valX > landMap.length - 1 || valY > landMap[0].length - 1) {
