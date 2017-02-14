@@ -1,15 +1,15 @@
 <html>
 <head>
 	<title>Mars Rover Kata!</title>
+	<link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-	<div>
+	<div class="rover-control">
 		<label>Input Commands</label>
 		<input id="commands" />
-		<button>Execute Rover Command</button>
+		<button onclick="processCommandChain(document.getElementById('commands').value)">Execute Commands Chain</button>
 	</div>
-	<div id="rover-console" style="background-color: #000000; color: #ffffff;">
-		asdasd
+	<div class="rover-console" id="rover-console">
 	</div>
 	<script type="text/javascript" src="rover.js"></script>
 </body>

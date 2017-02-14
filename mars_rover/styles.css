@@ -1,0 +1,41 @@
+/*
+   styles.css
+   ih-prework-js
+   
+   Created by Hery Martin on 2017-02-13.
+   Copyright 2017 Hery Martin. All rights reserved.
+*/
+
+body {
+	background-color: #333333;
+}
+
+.rover-control {
+	max-width: 600px;
+	min-width: 300px;
+	margin: auto;
+	background-color: #e6e6e6;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 10px;
+}
+
+.rover-console {
+	max-width: 600px;
+	min-width: 300px;
+	height: 600px;
+	max-height: 600px;
+	overflow-y: auto;
+	margin: auto;
+	border: solid 1px #40ff00;
+	background-color: #000000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 10px;
+	margin-top: 10px;
+	font-family: Courier;
+	color: #ffffff;
+}
+
