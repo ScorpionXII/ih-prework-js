@@ -196,7 +196,7 @@ function changeRover() {
 	}
 	
 	if (activeRover.positionX == inactiveRover.positionX && activeRover.positionY == inactiveRover.positionY) {
-		writeLine("Imposible to deploy a Rover in the same position, Move " + activeRover.name + " first!");
+		writeLine("Impossible to deploy a Rover in the same position, Move " + activeRover.name + " first!");
 		inactiveRover.positionX = -1;
 		inactiveRover.positionY = -1;	
 	} else {
