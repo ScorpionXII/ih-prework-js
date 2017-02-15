@@ -39,7 +39,7 @@ var inactiveRover = {
 // This counter is used to show number of lines in the console.
 var lineCounter = 1;
 
-//This function rotate the direction of a Rover using rotation method of an Array that represents a compass with the values ordered like [N, E, S, W]
+// This function rotate the direction of a Rover using rotation method of an Array that represents a compass with the values ordered like [N, E, S, W]
 function rotateDirection(direction, rover) {
 	if(direction == "left") {
 		writeLine("Received command to rotate to Left");
@@ -53,7 +53,7 @@ function rotateDirection(direction, rover) {
   	return rover;
 }
 
-//This function checks if the position defined by X, Y is valid, clear to move, occupied by a rover or if there is an obstacle
+// This function checks if the position defined by X, Y is valid, clear to move, occupied by a rover or if there is an obstacle
 function isClear(valX , valY) {
 	
 	writeLine("Received command to move to [" + valX + ", " + valY + "]");
@@ -79,7 +79,10 @@ function isClear(valX , valY) {
 	}
 }
 
-//This function Move a Rover Forward
+// This function Move a Rover Forward
+// 
+// The function is landMap dynamic dimensions based implemented, so you can change the grid and will work anyway
+// The first condition checked it's if a the Rover is in bounds of landMap, so next step will treated as a lap around the planet, if not, so increase or decrease de axis position
 function goForward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
@@ -111,7 +114,9 @@ function goForward(rover) {
   writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
 }
 
-//This function Move a Rover Backward
+// This function Move a Rover Backward
+//
+// Same as goForward but with inverted logic
 function goBackward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
@@ -142,7 +147,7 @@ function goBackward(rover) {
   writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
 }
 
-//This function Process a secuence of commands in a string like "fffrflfbb"
+// This function Process a secuence of commands in a string like "fffrflfbb"
 function processCommandString(string) {
 	string = string.toUpperCase();
 	for (var i = 0; i < string.length; i++) {
@@ -165,7 +170,7 @@ function processCommandString(string) {
 	}
 }
 
-//This function Write a Line inside a div that represents a Rover communication console
+// This function Write a Line inside a div that represents a Rover communication console
 function writeLine(string) {
 	var e = document.getElementById("rover-console");
 	e.innerHTML += lineCounter + ":\\> " + string;
@@ -174,7 +179,7 @@ function writeLine(string) {
 	e.scrollTop = e.scrollHeight;
 }
 
-//This function Prints info about initial coditions of a Rover 
+// This function Prints info about initial coditions of a Rover 
 function initialInfo () {
 	writeLine("Initializing communications...");
 	writeLine(activeRover.name + " it's online");
@@ -183,7 +188,7 @@ function initialInfo () {
   	console.log(landMap);
 }
 
-//This function Change the Active Rover and Deploy the Inactive one in [0, 0], When both Rovers are deployed the function exchange them to send commands to the other one
+// This function Change the Active Rover and Deploy the Inactive one in [0, 0], When both Rovers are deployed the function exchange them to send commands to the other one
 function changeRover() {
 	if (inactiveRover.positionX == -1 && inactiveRover.positionY == -1) {
 		inactiveRover.positionX = 0;
