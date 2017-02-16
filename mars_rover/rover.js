@@ -44,7 +44,7 @@ function rotateDirection(direction, rover) {
 	if(direction == "left") {
 		writeLine("Received command to rotate to Left");
 		rover.compass.unshift(rover.compass.pop());
-		writeLine(activeRover.name + "Compass it's now pointing: " + rover.compass[0]);
+		writeLine(activeRover.name + " Compass it's now pointing: " + rover.compass[0]);
 	} else if (direction == "right") {
 		writeLine("Received command to rotate to Right");
   		rover.compass.push(rover.compass.shift());	
