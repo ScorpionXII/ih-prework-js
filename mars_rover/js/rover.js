@@ -41,11 +41,11 @@ var lineCounter = 1;
 
 // This function rotate the direction of a Rover using rotation method of an Array that represents a compass with the values ordered like [N, E, S, W]
 function rotateDirection(direction, rover) {
-	if(direction == "left") {
+	if(direction === "left") {
 		writeLine("Received command to rotate to Left");
 		rover.compass.unshift(rover.compass.pop());
 		writeLine(activeRover.name + " Compass it's now pointing: " + rover.compass[0]);
-	} else if (direction == "right") {
+	} else if (direction === "right") {
 		writeLine("Received command to rotate to Right");
   		rover.compass.push(rover.compass.shift());	
   		writeLine(activeRover.name + " Compass it's now pointing: " + rover.compass[0]);
@@ -63,17 +63,17 @@ function isClear(valX , valY) {
 		return false;
 	}
 	
-	if (valX == inactiveRover.positionX && valY == inactiveRover.positionY) {
+	if (valX === inactiveRover.positionX && valY === inactiveRover.positionY) {
 		writeLine(inactiveRover.name + " was found in position " + valX + ", " + valY);
 		return false;		
 	}
 	
-	if (landMap[valX][valY] == 1) {
+	if (landMap[valX][valY] === 1) {
 		writeLine("Obstacle was found in position " + valX + ", " + valY);
 		return false;	
 	}
 	
-	if (landMap[valX][valY] == 0) {
+	if (landMap[valX][valY] === 0) {
 		writeLine("Path it's clear");
 		return true;	
 	}
@@ -86,13 +86,13 @@ function isClear(valX , valY) {
 function goForward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
-		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
+		if (rover.positionY + 1 === landMap[0].length && isClear(rover.positionX, 0)) {
 			rover.positionY = 0;
 		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
 	case 'E':
-		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+		if (rover.positionX + 1 === landMap.length && isClear(0, rover.positionY)) {
 			rover.positionX = 0;
 		} else if (isClear(rover.positionX + 1, rover.positionY))
 			rover.positionX++;
@@ -133,13 +133,13 @@ function goBackward(rover) {
 			rover.positionX--;
 		break;
 	case 'S':
-		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
+		if (rover.positionY + 1 === landMap[0].length && isClear(rover.positionX, 0)) {
 			rover.positionY = 0;
 		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
 	case 'W':
-		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+		if (rover.positionX + 1 === landMap.length && isClear(0, rover.positionY)) {
 			rover.positionX = 0;
 		} else if (isClear(rover.positionX + 1, rover.positionY))
 			rover.positionX++;
@@ -197,12 +197,12 @@ function initialInfo () {
 
 // This function Change the Active Rover and Deploy the Inactive one in [0, 0], When both Rovers are deployed the function exchange them to send commands to the other one
 function changeRover() {
-	if (inactiveRover.positionX == -1 && inactiveRover.positionY == -1) {
+	if (inactiveRover.positionX === -1 && inactiveRover.positionY === -1) {
 		inactiveRover.positionX = 0;
 		inactiveRover.positionY = 0;
 	}
 	
-	if (activeRover.positionX == inactiveRover.positionX && activeRover.positionY == inactiveRover.positionY) {
+	if (activeRover.positionX === inactiveRover.positionX && activeRover.positionY === inactiveRover.positionY) {
 		writeLine("Impossible to deploy a Rover in the same position, Move " + activeRover.name + " first!");
 		inactiveRover.positionX = -1;
 		inactiveRover.positionY = -1;	
