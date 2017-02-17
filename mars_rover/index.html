@@ -2,17 +2,27 @@
 <html>
 <head>
 	<title>Mars Rover Kata!</title>
-	<link rel="stylesheet" href="styles.css"/>
+	<link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-	<div class="rover-control">
-		<label>Input Commands</label>
-		<input id="commands" />
-		<button onclick="processCommandString(document.getElementById('commands').value)">Run</button>
-		<button onclick="changeRover()">Change Active Rover</button>
+	<div class="wrapper">
+		<div class="console-container">
+			<div class="rover-control">
+				<label>Input Commands</label>
+				<input id="commands" />
+				<button onclick="processCommandString(document.getElementById('commands').value)">Run</button>
+				<button onclick="changeRover()">Change Active Rover</button>
+			</div>
+			<div class="rover-console" id="rover-console">
+			</div>
+		</div>
+		<div class="map-container">
+			<canvas class="map" id="map" height="420" width="420">
+				Ups! :( Your Browser don't support HTML5 Canvas...
+			</canvas>
+		</div>
 	</div>
-	<div class="rover-console" id="rover-console">
-	</div>
-	<script type="text/javascript" src="rover.js"></script>
+	<script type="text/javascript" src="js/draw-map.js"></script>
+	<script type="text/javascript" src="js/rover.js"></script>
 </body>
 </html>

@@ -9,13 +9,13 @@
 // This is the 10 x 10 Land Map, 0 repesent clear path, change to 1 any value if you need to introduce obstacles
 var landMap = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 1, 1, 1, 0, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
@@ -86,32 +86,33 @@ function isClear(valX , valY) {
 function goForward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
-		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
-			rover.positionX = 0;
-		} else if (isClear(rover.positionX + 1, rover.positionY))
-			rover.positionX++;
-		break;
-	case 'E':
 		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
 			rover.positionY = 0;
 		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
-	case 'S':
-		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
-			rover.positionX = landMap.length - 1;
-		} else if (isClear(rover.positionX - 1, rover.positionY))
-			rover.positionX--;
+	case 'E':
+		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+			rover.positionX = 0;
+		} else if (isClear(rover.positionX + 1, rover.positionY))
+			rover.positionX++;
 		break;
-	case 'W':
+	case 'S':
 		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
 			rover.positionY = landMap[0].length - 1;
 		} else if (isClear(rover.positionX, rover.positionY - 1))
 			rover.positionY--;
 		break;
+	case 'W':
+		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
+			rover.positionX = landMap.length - 1;
+		} else if (isClear(rover.positionX - 1, rover.positionY))
+			rover.positionX--;
+		break;
 	};
 	
-  writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
+  writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]");
+
 }
 
 // This function Move a Rover Backward
@@ -120,31 +121,33 @@ function goForward(rover) {
 function goBackward(rover) {
 	switch(rover.compass[0]) {
 	case 'N':
+		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
+			rover.positionY = landMap[0].length - 1;
+		} else if (isClear(rover.positionX, rover.positionY - 1))
+			rover.positionY--;	
+		break;
+	case 'E':
 		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
 			rover.positionX = landMap.length - 1;
 		} else if (isClear(rover.positionX - 1, rover.positionY))
 			rover.positionX--;
 		break;
-	case 'E':
-		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
-			rover.positionY = landMap[0].length - 1;
-		} else if (isClear(rover.positionX, rover.positionY - 1))
-			rover.positionY--;
-		break;
 	case 'S':
-		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
-			rover.positionX = 0;
-		} else if (isClear(rover.positionX + 1, rover.positionY))
-			rover.positionX++;
-	case 'W':
 		if (rover.positionY + 1 == landMap[0].length && isClear(rover.positionX, 0)) {
 			rover.positionY = 0;
 		} else if (isClear(rover.positionX, rover.positionY + 1))
 			rover.positionY++;
 		break;
+	case 'W':
+		if (rover.positionX + 1 == landMap.length && isClear(0, rover.positionY)) {
+			rover.positionX = 0;
+		} else if (isClear(rover.positionX + 1, rover.positionY))
+			rover.positionX++;
+		break;
 	};
 	
-  writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]"); 
+  writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]");
+
 }
 
 // This function Process a secuence of commands in a string like "fffrflfbb"
@@ -168,6 +171,8 @@ function processCommandString(string) {
 				writeLine("Unknown Command");
 		}
 	}
+	
+	drawMap();
 }
 
 // This function Write a Line inside a div that represents a Rover communication console
@@ -186,6 +191,8 @@ function initialInfo () {
 	writeLine(activeRover.name + " Position: [" + activeRover.positionX + ", " + activeRover.positionY + "]");
   	writeLine(activeRover.name + " Compass it's pointing: " + activeRover.compass[0]);
   	console.log(landMap);
+  	
+  	drawMap();
 }
 
 // This function Change the Active Rover and Deploy the Inactive one in [0, 0], When both Rovers are deployed the function exchange them to send commands to the other one
