@@ -27,7 +27,7 @@ body {
 }
 
 .rover-control {
-	max-width: 500px;
+	width: 420px;
 	min-width: 300px;
 	margin: auto;
 	background-color: #e6e6e6;
@@ -37,8 +37,32 @@ body {
 	padding: 10px;
 }
 
+.rover-control input {
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border: solid 1px #006633;
+	height: 18px;
+}
+
+.rover-control a {
+	padding: 3px 8px 3px 8px;
+	border: solid 1px #006633;
+	text-decoration: none;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #FFFFFF;
+	color: #006633;
+}
+
+.rover-control a:hover {
+	background-color: #006633;
+	color: #FFFFFF;
+}
+
 .rover-console {
-	max-width: 500px;
+	width: 420px;
 	min-width: 300px;
 	height: 347px;
 	max-height: 600px;
