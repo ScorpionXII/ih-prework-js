@@ -40,7 +40,7 @@ var inactiveRover = {
 var lineCounter = 1;
 
 // This function rotate the direction of a Rover using rotation method of an Array that represents a compass with the values ordered like [N, E, S, W]
-function rotateDirection(direction, rover) {
+function rotateRover(direction, rover) {
 	if(direction === "left") {
 		writeLine("Received command to rotate to Left");
 		rover.compass.unshift(rover.compass.pop());
@@ -79,70 +79,53 @@ function isClear(valX , valY) {
 	}
 }
 
-// This function Move a Rover Forward
-// 
+// This function Move a Rover in X-axis Forward or Backward using values for delta 1 (F) or -1 (B)
+//
 // The function is landMap dynamic dimensions based implemented, so you can change the grid and will work anyway
-// The first condition checked it's if a the Rover is in bounds of landMap, so next step will treated as a lap around the planet, if not, so increase or decrease de axis position
-function goForward(rover) {
-	switch(rover.compass[0]) {
-	case 'N':
-		if (rover.positionY + 1 === landMap[0].length && isClear(rover.positionX, 0)) {
-			rover.positionY = 0;
-		} else if (isClear(rover.positionX, rover.positionY + 1))
-			rover.positionY++;
-		break;
-	case 'E':
-		if (rover.positionX + 1 === landMap.length && isClear(0, rover.positionY)) {
-			rover.positionX = 0;
-		} else if (isClear(rover.positionX + 1, rover.positionY))
-			rover.positionX++;
-		break;
-	case 'S':
-		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
-			rover.positionY = landMap[0].length - 1;
-		} else if (isClear(rover.positionX, rover.positionY - 1))
-			rover.positionY--;
-		break;
-	case 'W':
-		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
+function moveX(delta, rover) {
+	if (!(rover.positionX + delta in landMap)) {
+		if (delta === -1 && isClear(landMap.length - 1, rover.positionY))
 			rover.positionX = landMap.length - 1;
-		} else if (isClear(rover.positionX - 1, rover.positionY))
-			rover.positionX--;
-		break;
-	};
-	
-  writeLine(activeRover.name + " Position is: [" + rover.positionX + ", " + rover.positionY + "]");
-
+		else if (delta === 1 && isClear(0, rover.positionY))
+			rover.positionX = 0;
+	} else if (isClear(rover.positionX + delta, rover.positionY))
+		rover.positionX += delta;
 }
 
-// This function Move a Rover Backward
+//This function Move a Rover in Y-axis Forward or Backward using values for delta 1 (F) or -1 (B)
 //
-// Same as goForward but with inverted logic
-function goBackward(rover) {
+// The function is landMap dynamic dimensions based implemented, so you can change the grid and will work anyway
+function moveY(delta, rover) {
+	if (!(rover.positionY + delta in landMap[rover.positionX])) {
+		if (delta === -1 && isClear(rover.positionX, landMap[0].length - 1))
+			rover.positionY = landMap[0].length - 1;
+		else if (delta === 1 && isClear(rover.positionX, 0))
+			rover.positionY = 0;
+	} else if (isClear(rover.positionX, rover.positionY + delta))
+		rover.positionY += delta;
+}
+
+// This function Move a Rover
+function moveRover(direction, rover) {
+	var delta = 0;
+	
+	if (direction === "forward")
+		delta = 1;
+	else if (direction === "backward")
+		delta = -1;
+	
 	switch(rover.compass[0]) {
 	case 'N':
-		if (rover.positionY - 1 < 0 && isClear(rover.positionX, landMap[0].length - 1)) {
-			rover.positionY = landMap[0].length - 1;
-		} else if (isClear(rover.positionX, rover.positionY - 1))
-			rover.positionY--;	
+		moveY(delta, rover);
 		break;
 	case 'E':
-		if (rover.positionX - 1 < 0 && isClear(landMap.length - 1, rover.positionY)) {
-			rover.positionX = landMap.length - 1;
-		} else if (isClear(rover.positionX - 1, rover.positionY))
-			rover.positionX--;
+		moveX(delta, rover);
 		break;
 	case 'S':
-		if (rover.positionY + 1 === landMap[0].length && isClear(rover.positionX, 0)) {
-			rover.positionY = 0;
-		} else if (isClear(rover.positionX, rover.positionY + 1))
-			rover.positionY++;
+		moveY(-delta, rover);
 		break;
 	case 'W':
-		if (rover.positionX + 1 === landMap.length && isClear(0, rover.positionY)) {
-			rover.positionX = 0;
-		} else if (isClear(rover.positionX + 1, rover.positionY))
-			rover.positionX++;
+		moveX(-delta, rover);
 		break;
 	};
 	
@@ -156,16 +139,16 @@ function processCommandString(string) {
 	for (var i = 0; i < string.length; i++) {
 		switch (string[i]) {
 			case 'L': 
-				rotateDirection("left", activeRover);
+				rotateRover("left", activeRover);
 				break;
 			case 'R':
-				rotateDirection("right", activeRover);
+				rotateRover("right", activeRover);
 				break;
 			case 'F':
-				goForward(activeRover);
+				moveRover("forward" ,activeRover);
 				break;
 			case 'B':
-				goBackward(activeRover);
+				moveRover("backward", activeRover);
 				break;
 			default:
 				writeLine("Unknown Command");
