@@ -1,3 +1,11 @@
+// 
+//  draw-map.js
+//  ih-prework-js
+//  
+//  Created by Hery Martin on 2017-02-13.
+//  Copyright 2017 Hery Martin . All rights reserved.
+// 
+
 var canvas = document.getElementById("map");
 var drawer = canvas.getContext("2d");
 
