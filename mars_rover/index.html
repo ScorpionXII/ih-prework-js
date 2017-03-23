@@ -1,28 +1,27 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<title>Mars Rover Kata!</title>
-	<link rel="stylesheet" href="css/styles.css"/>
-</head>
-<body>
-	<div class="wrapper">
-		<div class="console-container">
-			<div class="rover-control">
-				<label>Commands</label>
-				<input id="commands" />
-				<a href="#" onclick="processCommandString(document.getElementById('commands').value)">Run</a>
-				<a href="#" onclick="changeRover()">Change Active Rover</a>
-			</div>
-			<div class="rover-console" id="rover-console">
-			</div>
-		</div>
-		<div class="map-container">
-			<canvas class="map" id="map" height="420" width="420">
-				Ups! :( Your Browser don't support HTML5 Canvas...
-			</canvas>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/draw-map.js"></script>
-	<script type="text/javascript" src="js/rover.js"></script>
-</body>
+    <head>
+        <title>Mars Rover Kata!</title>
+        <link rel="stylesheet" href="css/styles.css"/>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="console-container">
+                <div class="rover-control">
+                    <label>Commands</label>
+                    <input id="commands" />
+                    <a href="#" onclick="processCommandString(document.getElementById('commands').value)">Run</a>
+                    <a href="#" onclick="changeRover()">Change Active Rover</a>
+                </div>
+                <div class="rover-console" id="rover-console"></div>
+            </div>
+            <div class="map-container">
+                <canvas class="map" id="map" height="420" width="420">
+                    Ups! :( Your Browser don't support HTML5 Canvas...
+                </canvas>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/draw-map.js"></script>
+        <script type="text/javascript" src="js/rover.js"></script>
+    </body>
 </html>
